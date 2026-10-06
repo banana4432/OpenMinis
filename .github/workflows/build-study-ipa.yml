@@ -143,6 +143,28 @@ jobs:
             esac
           done < <(find "$APP/PlugIns" -maxdepth 1 -type d -name '*.appex' 2>/dev/null || true)
 
+          # Preserve each target's entitlement declaration in an ad-hoc signature.
+          # Resigning tools inspect these signatures when generating the final
+          # provisioning profile. Without them, App Group access is commonly
+          # stripped and Minis crashes when its shared container resolves nil.
+          find "$APP/Frameworks" -maxdepth 1 -type d -name '*.framework' -print0 2>/dev/null |
+            while IFS= read -r -d '' framework; do
+              codesign --force --sign - "$framework"
+            done
+          codesign --force --sign - \
+            --entitlements src/ios/FileProvider/FileProvider.entitlements \
+            "$APP/PlugIns/MinisFileProvider.appex"
+          codesign --force --sign - \
+            --entitlements src/ios/ShareExtension/ShareExtension.entitlements \
+            "$APP/PlugIns/MinisShare.appex"
+          codesign --force --sign - \
+            --entitlements src/ios/AgentWidget/AgentWidget.entitlements \
+            "$APP/PlugIns/AgentWidgetExtension.appex"
+          codesign --force --sign - \
+            --entitlements src/ios/Minis.entitlements \
+            "$APP"
+          codesign --verify --deep --strict "$APP"
+
           find "$APP" -name embedded.mobileprovision -delete
           rm -rf Payload Minis-Study-unsigned.ipa
           mkdir Payload
