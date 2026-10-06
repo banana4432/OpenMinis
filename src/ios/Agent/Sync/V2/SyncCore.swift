@@ -270,7 +270,7 @@ final class SyncCore {
                 }
             }
         }
-        m.start(queue: DispatchQueue(label: "com.openminis.sync.pathMonitor"))
+        m.start(queue: DispatchQueue(label: "com.banana4432.minis.study.sync.pathMonitor"))
         pathMonitor = m
     }
 

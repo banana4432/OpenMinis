@@ -2,9 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleDisplayName</key>
+	<string>Minis 学习</string>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>com.openminis.app.liveactivity-refresh</string>
+		<string>com.banana4432.minis.study.liveactivity-refresh</string>
 	</array>
 	<key>CFBundleDocumentTypes</key>
 	<array>
@@ -29,7 +31,7 @@
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>com.openminis.app.minisbak</string>
+				<string>com.banana4432.minis.study.minisbak</string>
 			</array>
 		</dict>
 	</array>
@@ -163,7 +165,7 @@
 			<string>Claude OAuth Callback</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.openminis.app</string>
+				<string>com.banana4432.minis.study</string>
 			</array>
 		</dict>
 		<dict>
@@ -256,7 +258,7 @@
 			<key>UTTypeDescription</key>
 			<string>Minis Backup</string>
 			<key>UTTypeIdentifier</key>
-			<string>com.openminis.app.minisbak</string>
+			<string>com.banana4432.minis.study.minisbak</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>

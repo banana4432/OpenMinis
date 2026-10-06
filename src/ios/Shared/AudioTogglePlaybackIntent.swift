@@ -20,7 +20,7 @@ import Foundation
 /// and the toggle takes effect immediately without opening the app to foreground.
 enum AudioTogglePlaybackBridge {
     /// Darwin notification name the widget posts and the app observes.
-    static let darwinNotificationName = "com.openminis.app.liveActivity.audioToggle"
+    static let darwinNotificationName = "com.banana4432.minis.study.liveActivity.audioToggle"
 }
 
 /// [T-ios-live-activity-audio-toggle] Live Activity button intent that toggles
