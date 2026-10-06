@@ -7,6 +7,32 @@ enum SharedContainerStore {
 
     private static let pendingShareKey = "pendingShare"
 
+    /// Container used by the main app for storage. Properly provisioned builds
+    /// use the App Group; sideloaded builds whose profile strips App Groups
+    /// fall back to this target's own sandbox instead of crashing at launch.
+    static var storageContainerURL: URL {
+        let fileManager = FileManager.default
+        if let groupContainer = fileManager.containerURL(
+            forSecurityApplicationGroupIdentifier: appGroupID
+        ) {
+            return groupContainer
+        }
+
+        let base = fileManager.urls(
+            for: .applicationSupportDirectory,
+            in: .userDomainMask
+        ).first ?? fileManager.temporaryDirectory
+        let fallback = base.appendingPathComponent(
+            "MinisStudyLocalContainer",
+            isDirectory: true
+        )
+        try? fileManager.createDirectory(
+            at: fallback,
+            withIntermediateDirectories: true
+        )
+        return fallback
+    }
+
     static var sharedDefaults: UserDefaults? {
         UserDefaults(suiteName: appGroupID)
     }
